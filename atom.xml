@@ -77,6 +77,144 @@
   </entry>
   
   <entry>
+    <title><![CDATA[Chrome控制台]]></title>
+    <link href="http://yoursite.com/2015/11/05/Chrome%E6%8E%A7%E5%88%B6%E5%8F%B0/"/>
+    <id>http://yoursite.com/2015/11/05/Chrome控制台/</id>
+    <published>2015-11-05T11:59:15.000Z</published>
+    <updated>2015-11-05T12:15:07.163Z</updated>
+    <content type="html"><![CDATA[<h2 id="控制台指令">控制台指令</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">指令</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$_</td>
+<td style="text-align:left">表示最近一次表达式结果</td>
+</tr>
+<tr>
+<td style="text-align:left">$0~4</td>
+<td style="text-align:left">表示最近在DOM结点树上点选的5个DOM节点</td>
+</tr>
+<tr>
+<td style="text-align:left">$(selector)</td>
+<td style="text-align:left">document.querySelector() 的封装</td>
+</tr>
+<tr>
+<td style="text-align:left">$$(selector)</td>
+<td style="text-align:left">document.querySelectorAll() 的封装</td>
+</tr>
+<tr>
+<td style="text-align:left">monitor(fn)</td>
+<td style="text-align:left">监听一个函数，输出函数名与执行时传入的参数</td>
+</tr>
+<tr>
+<td style="text-align:left">unmonitor(fn)</td>
+<td style="text-align:left">停止监听一个函数</td>
+</tr>
+<tr>
+<td style="text-align:left">keys(object)</td>
+<td style="text-align:left">返回所有属性名组成的数组</td>
+</tr>
+<tr>
+<td style="text-align:left">values(object)</td>
+<td style="text-align:left">返回所有属性值组成的数组</td>
+</tr>
+</tbody>
+</table>
+<h2 id="console指令">console指令</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">console指令</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">console.log</td>
+<td style="text-align:center">输出普通信息</td>
+</tr>
+<tr>
+<td style="text-align:left">console.info</td>
+<td style="text-align:center">输出提示性信息</td>
+</tr>
+<tr>
+<td style="text-align:left">console.error</td>
+<td style="text-align:center">输出错误信息</td>
+</tr>
+<tr>
+<td style="text-align:left">console.warn</td>
+<td style="text-align:center">输出警示信息</td>
+</tr>
+<tr>
+<td style="text-align:left">console.debug</td>
+<td style="text-align:center">输出调试信息</td>
+</tr>
+<tr>
+<td style="text-align:left">四种占位符：字符<strong>%s</strong>、整数<strong>%d</strong> or <strong>%i</strong>、浮点数<strong>%f</strong>、对象<strong>%o</strong></td>
+<td style="text-align:center"><img src="https://app.yinxiang.com/shard/s58/res/b0dd78b2-63a2-4075-808b-d0f8643b2854/1446619292788.png" alt="Alt text"></td>
+</tr>
+</tbody>
+</table>
+<p>|console.dir|将DOM以树结构输出|<br>|console.dirxml|用来显示网页的某个node所包含的html代码|<br>|console.group|输出一组信息的开头|<br>| console.groupEnd|输出一组信息的结束|<br>|console.assert|断言，只有表达式为false才输出|<br>|console.count|执行计数器，输出执行次数|<br>|console.profile配合console.profileEnd<img src="https://app.yinxiang.com/shard/s58/res/0531612a-b33c-4fdb-a128-2517e008e0d7/1446621112146.png" alt="Alt text">|配合使用来查看CPU使用相关信息，在Profiles面板里面查看就可以看到cpu相关使用信息<img src="https://app.yinxiang.com/shard/s58/res/3f9e151a-f279-4359-b970-7da43ad98faa/1446621131563.png" alt="Alt text">|<br>|console.timeLine和console.timeLineEnd|配合一起记录一段时间轴|<br>|console.trace|堆栈跟踪相关的调试|<br>|查看上述具体API|<a href="https://developer.chrome.com/devtools/docs/console-api|" target="_blank" rel="external">https://developer.chrome.com/devtools/docs/console-api|</a></p>
+<h2 id="console-log()_样式">console.log() 样式</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">格式化符号</th>
+<th style="text-align:center">实现的功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">%s</td>
+<td style="text-align:center">格式化成字符串输出</td>
+</tr>
+<tr>
+<td style="text-align:left">%d or %i</td>
+<td style="text-align:center">格式化成数值输出</td>
+</tr>
+<tr>
+<td style="text-align:left">%f</td>
+<td style="text-align:center">格式化成浮点数输出</td>
+</tr>
+<tr>
+<td style="text-align:left">%o</td>
+<td style="text-align:center">转化成展开的DOM元素输出</td>
+</tr>
+<tr>
+<td style="text-align:left">%O</td>
+<td style="text-align:center">转化成JavaScript对象输出</td>
+</tr>
+<tr>
+<td style="text-align:left">%c</td>
+<td style="text-align:center">把字符串按照你提供的样式格式化后输入</td>
+</tr>
+</tbody>
+</table>
+<p>添加格式化符号，后面跟css样式。<br>例子，输入：</p>
+<blockquote>
+<p>console.log(‘%cRainbow Text ‘, ‘background-image:-webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );color:transparent;-webkit-background-clip: text;font-size:5em;’);</p>
+</blockquote>
+<p>效果：</p>
+<p><img src="https://app.yinxiang.com/shard/s58/res/17818aeb-1462-4bd9-a043-378cc0154385/1446621731189.png" alt="Alt text"></p>
+<p><img src="https://app.yinxiang.com/shard/s58/res/f78d4ec5-d237-44b0-a7f7-505ffe7daf24/1446621656777.png" alt="Alt text"></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="控制台指令">控制台指令</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">指令</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[如果你突然瞎了该怎么办]]></title>
     <link href="http://yoursite.com/2015/11/05/%E5%A6%82%E6%9E%9C%E4%BD%A0%E7%AA%81%E7%84%B6%E7%9E%8E%E4%BA%86%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8A%9E/"/>
     <id>http://yoursite.com/2015/11/05/如果你突然瞎了该怎么办/</id>

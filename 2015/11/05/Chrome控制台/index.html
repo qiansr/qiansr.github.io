@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>姐姐，今夜我在德令哈 | qiansr</title>
+  <title>Chrome控制台 | qiansr</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -230,30 +230,146 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2085-01-15T23:33:44.000Z" itemprop="datePublished">
-          2085-01-16
+      <time datetime="2015-11-05T11:59:15.000Z" itemprop="datePublished">
+          2015-11-05
       </time>
     
 </span>
-                <h1>姐姐，今夜我在德令哈</h1>
+                <h1>Chrome控制台</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<p>dsf sdf sd fds<br>以上是摘要<br><a id="more"></a><br>以下是余下全文</p>
-<p>jdsakfhds 就撒旦复活士大夫是的健康浪费多少啊分开来的舒服的沙发</p>
+      		<h2 id="控制台指令">控制台指令</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">指令</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$_</td>
+<td style="text-align:left">表示最近一次表达式结果</td>
+</tr>
+<tr>
+<td style="text-align:left">$0~4</td>
+<td style="text-align:left">表示最近在DOM结点树上点选的5个DOM节点</td>
+</tr>
+<tr>
+<td style="text-align:left">$(selector)</td>
+<td style="text-align:left">document.querySelector() 的封装</td>
+</tr>
+<tr>
+<td style="text-align:left">$$(selector)</td>
+<td style="text-align:left">document.querySelectorAll() 的封装</td>
+</tr>
+<tr>
+<td style="text-align:left">monitor(fn)</td>
+<td style="text-align:left">监听一个函数，输出函数名与执行时传入的参数</td>
+</tr>
+<tr>
+<td style="text-align:left">unmonitor(fn)</td>
+<td style="text-align:left">停止监听一个函数</td>
+</tr>
+<tr>
+<td style="text-align:left">keys(object)</td>
+<td style="text-align:left">返回所有属性名组成的数组</td>
+</tr>
+<tr>
+<td style="text-align:left">values(object)</td>
+<td style="text-align:left">返回所有属性值组成的数组</td>
+</tr>
+</tbody>
+</table>
+<h2 id="console指令">console指令</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">console指令</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">console.log</td>
+<td style="text-align:center">输出普通信息</td>
+</tr>
+<tr>
+<td style="text-align:left">console.info</td>
+<td style="text-align:center">输出提示性信息</td>
+</tr>
+<tr>
+<td style="text-align:left">console.error</td>
+<td style="text-align:center">输出错误信息</td>
+</tr>
+<tr>
+<td style="text-align:left">console.warn</td>
+<td style="text-align:center">输出警示信息</td>
+</tr>
+<tr>
+<td style="text-align:left">console.debug</td>
+<td style="text-align:center">输出调试信息</td>
+</tr>
+<tr>
+<td style="text-align:left">四种占位符：字符<strong>%s</strong>、整数<strong>%d</strong> or <strong>%i</strong>、浮点数<strong>%f</strong>、对象<strong>%o</strong></td>
+<td style="text-align:center"><img src="https://app.yinxiang.com/shard/s58/res/b0dd78b2-63a2-4075-808b-d0f8643b2854/1446619292788.png" alt="Alt text"></td>
+</tr>
+</tbody>
+</table>
+<p>|console.dir|将DOM以树结构输出|<br>|console.dirxml|用来显示网页的某个node所包含的html代码|<br>|console.group|输出一组信息的开头|<br>| console.groupEnd|输出一组信息的结束|<br>|console.assert|断言，只有表达式为false才输出|<br>|console.count|执行计数器，输出执行次数|<br>|console.profile配合console.profileEnd<img src="https://app.yinxiang.com/shard/s58/res/0531612a-b33c-4fdb-a128-2517e008e0d7/1446621112146.png" alt="Alt text">|配合使用来查看CPU使用相关信息，在Profiles面板里面查看就可以看到cpu相关使用信息<img src="https://app.yinxiang.com/shard/s58/res/3f9e151a-f279-4359-b970-7da43ad98faa/1446621131563.png" alt="Alt text">|<br>|console.timeLine和console.timeLineEnd|配合一起记录一段时间轴|<br>|console.trace|堆栈跟踪相关的调试|<br>|查看上述具体API|<a href="https://developer.chrome.com/devtools/docs/console-api|" target="_blank" rel="external">https://developer.chrome.com/devtools/docs/console-api|</a></p>
+<h2 id="console-log()_样式">console.log() 样式</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">格式化符号</th>
+<th style="text-align:center">实现的功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">%s</td>
+<td style="text-align:center">格式化成字符串输出</td>
+</tr>
+<tr>
+<td style="text-align:left">%d or %i</td>
+<td style="text-align:center">格式化成数值输出</td>
+</tr>
+<tr>
+<td style="text-align:left">%f</td>
+<td style="text-align:center">格式化成浮点数输出</td>
+</tr>
+<tr>
+<td style="text-align:left">%o</td>
+<td style="text-align:center">转化成展开的DOM元素输出</td>
+</tr>
+<tr>
+<td style="text-align:left">%O</td>
+<td style="text-align:center">转化成JavaScript对象输出</td>
+</tr>
+<tr>
+<td style="text-align:left">%c</td>
+<td style="text-align:center">把字符串按照你提供的样式格式化后输入</td>
+</tr>
+</tbody>
+</table>
+<p>添加格式化符号，后面跟css样式。<br>例子，输入：</p>
+<blockquote>
+<p>console.log(‘%cRainbow Text ‘, ‘background-image:-webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );color:transparent;-webkit-background-clip: text;font-size:5em;’);</p>
+</blockquote>
+<p>效果：</p>
+<p><img src="https://app.yinxiang.com/shard/s58/res/17818aeb-1462-4bd9-a043-378cc0154385/1446621731189.png" alt="Alt text"></p>
+<p><img src="https://app.yinxiang.com/shard/s58/res/f78d4ec5-d237-44b0-a7f7-505ffe7daf24/1446621656777.png" alt="Alt text"></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2085/01/16/诗夜 - 副本 - 副本/" style="float: left;">
-        ← 我的阅历
+    <a class="pull-left" href="/2085/01/16/姐姐，今夜我在德令哈/" style="float: left;">
+        ← 姐姐，今夜我在德令哈
     </a>
     
     
-    <a class="pull-right" href="/2015/11/05/Chrome控制台/">
-        Chrome控制台 →
+    <a class="pull-right" href="/2015/11/05/如果你突然瞎了该怎么办/">
+        如果你突然瞎了该怎么办 →
     </a>
     <i style="clear:both;display:block"></i>
     
@@ -263,9 +379,125 @@
 
 
 <!-- 多说评论框 start -->
-<div class="ds-share flat" data-thread-key="2085/01/16/姐姐，今夜我在德令哈/" data-title="姐姐，今夜我在德令哈" data-content="&lt;p&gt;dsf sdf sd fds&lt;br&gt;以上是摘要&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;以下是余下全文&lt;/p&gt;
-&lt;p&gt;jdsakfhds 就撒旦复活士大夫是的健康浪费多少啊分开来的舒服的沙发&lt;/p&gt;
-" data-url="http://yoursite.com/2085/01/16/姐姐，今夜我在德令哈/">
+<div class="ds-share flat" data-thread-key="2015/11/05/Chrome控制台/" data-title="Chrome控制台" data-content="&lt;h2 id=&quot;控制台指令&quot;&gt;控制台指令&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;指令&lt;/th&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;$_&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;表示最近一次表达式结果&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;$0~4&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;表示最近在DOM结点树上点选的5个DOM节点&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;$(selector)&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;document.querySelector() 的封装&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;$$(selector)&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;document.querySelectorAll() 的封装&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;monitor(fn)&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;监听一个函数，输出函数名与执行时传入的参数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;unmonitor(fn)&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;停止监听一个函数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;keys(object)&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;返回所有属性名组成的数组&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;values(object)&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;返回所有属性值组成的数组&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&quot;console指令&quot;&gt;console指令&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;console指令&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;console.log&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;输出普通信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;console.info&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;输出提示性信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;console.error&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;输出错误信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;console.warn&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;输出警示信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;console.debug&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;输出调试信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;四种占位符：字符&lt;strong&gt;%s&lt;/strong&gt;、整数&lt;strong&gt;%d&lt;/strong&gt; or &lt;strong&gt;%i&lt;/strong&gt;、浮点数&lt;strong&gt;%f&lt;/strong&gt;、对象&lt;strong&gt;%o&lt;/strong&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;https://app.yinxiang.com/shard/s58/res/b0dd78b2-63a2-4075-808b-d0f8643b2854/1446619292788.png&quot; alt=&quot;Alt text&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;|console.dir|将DOM以树结构输出|&lt;br&gt;|console.dirxml|用来显示网页的某个node所包含的html代码|&lt;br&gt;|console.group|输出一组信息的开头|&lt;br&gt;| console.groupEnd|输出一组信息的结束|&lt;br&gt;|console.assert|断言，只有表达式为false才输出|&lt;br&gt;|console.count|执行计数器，输出执行次数|&lt;br&gt;|console.profile配合console.profileEnd&lt;img src=&quot;https://app.yinxiang.com/shard/s58/res/0531612a-b33c-4fdb-a128-2517e008e0d7/1446621112146.png&quot; alt=&quot;Alt text&quot;&gt;|配合使用来查看CPU使用相关信息，在Profiles面板里面查看就可以看到cpu相关使用信息&lt;img src=&quot;https://app.yinxiang.com/shard/s58/res/3f9e151a-f279-4359-b970-7da43ad98faa/1446621131563.png&quot; alt=&quot;Alt text&quot;&gt;|&lt;br&gt;|console.timeLine和console.timeLineEnd|配合一起记录一段时间轴|&lt;br&gt;|console.trace|堆栈跟踪相关的调试|&lt;br&gt;|查看上述具体API|&lt;a href=&quot;https://developer.chrome.com/devtools/docs/console-api|&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developer.chrome.com/devtools/docs/console-api|&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;console-log()_样式&quot;&gt;console.log() 样式&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;格式化符号&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;实现的功能&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;%s&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;格式化成字符串输出&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;%d or %i&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;格式化成数值输出&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;%f&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;格式化成浮点数输出&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;%o&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;转化成展开的DOM元素输出&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;%O&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;转化成JavaScript对象输出&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;%c&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;把字符串按照你提供的样式格式化后输入&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;添加格式化符号，后面跟css样式。&lt;br&gt;例子，输入：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;console.log(‘%cRainbow Text ‘, ‘background-image:-webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );color:transparent;-webkit-background-clip: text;font-size:5em;’);&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;效果：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://app.yinxiang.com/shard/s58/res/17818aeb-1462-4bd9-a043-378cc0154385/1446621731189.png&quot; alt=&quot;Alt text&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://app.yinxiang.com/shard/s58/res/f78d4ec5-d237-44b0-a7f7-505ffe7daf24/1446621656777.png&quot; alt=&quot;Alt text&quot;&gt;&lt;/p&gt;
+" data-url="http://yoursite.com/2015/11/05/Chrome控制台/">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
@@ -278,7 +510,7 @@
       </div>
     </div>
  </div>
-	<div class="ds-thread" data-thread-key="2085/01/16/姐姐，今夜我在德令哈/" data-title="姐姐，今夜我在德令哈" data-url="http://yoursite.com/2085/01/16/姐姐，今夜我在德令哈/" data-form-position="top"></div>
+	<div class="ds-thread" data-thread-key="2015/11/05/Chrome控制台/" data-title="Chrome控制台" data-url="http://yoursite.com/2015/11/05/Chrome控制台/" data-form-position="top"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
