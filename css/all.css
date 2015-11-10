@@ -3472,10 +3472,8 @@ footer .footer_bottom {
 #ds-reset .ds-replybox.ds-inline-replybox a.ds-avatar img {width: 32px !important;height: 32px !important; border-radius:50px !important;} 
 #ds-reset .ds-replybox a.ds-avatar,
 #ds-reset .ds-replybox .ds-avatar img { padding:0;width:50px !important;height:50px !important; border-radius:50px !important; }
-#ds-reset .ds-avatar img {width:32px !important;height:32px !important;border-radius:32px !important;box-shadow:0 1px 3px rgba(0, 0, 0, 0.22) !important;
-							-webkit-transition:.4s all ease-in-out;-moz-transition:.4s all ease-in-out;-o-transition:.4s all ease-in-out;-ms-transition:.4s all ease-in-out;transition:.4s all ease-in-out;
-							}
-.ds-post-self:hover .ds-avatar img {-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-o-transform:rotate(360deg);-ms-transform:rotate(360deg);transform:rotate(360deg);}
+#ds-reset .ds-avatar img {width:32px !important;height:32px !important;border-radius:32px !important;box-shadow:0 1px 3px rgba(0, 0, 0, 0.22) !important;}
+.ds-post-self:hover .ds-avatar img {}
 
 #ds-thread #ds-reset .ds-comment-body {  background: #FAFAF7 !important;
   padding: 15px 15px 12px 32px;
