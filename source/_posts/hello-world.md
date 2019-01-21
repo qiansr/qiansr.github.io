@@ -1,5 +1,9 @@
 ---
 title: Hello World
+categories:
+- 前端
+tags:
+- hexo
 ---
 
 

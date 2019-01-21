@@ -7,7 +7,7 @@ title: 神刀
 subtitle:
 description:
 author: 神刀
-language:
+language: zh-Hans
 timezone:
 
 # URL
@@ -72,7 +72,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next #landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -80,3 +80,21 @@ deploy:
   type: git 
   repo: https://github.com/qiansr/qiansr.github.io.git
   branch: master
+
+# 新增搜索
+algolia:  
+  applicationID: 'RINL8Q0DQF'
+  apiKey: '55343f67f7a297303ab19bd5408f8330'
+  adminApiKey: '94ad4def316f59b6f433de81469cc362'
+  indexName: 'hexo-blog'
+  chunkSize: 5000
+
+# 侧边栏头像
+avatar: /images/logo.jpeg
+
+# feed
+feed: 
+  type: rss2
+  path: rss2.xml
+  limit: 5
+  content: 'true'
