@@ -51,8 +51,8 @@
     
     <item>
       <title>Hexo + github 博客搭建指南</title>
-      <link>http://qiansr.github.io/2018/01/14/Hexo%20+%20github%20%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/</link>
-      <guid>http://qiansr.github.io/2018/01/14/Hexo%20+%20github%20%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/</guid>
+      <link>http://qiansr.github.io/2018/01/14/Hexo+github%20%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/</link>
+      <guid>http://qiansr.github.io/2018/01/14/Hexo+github%20%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/</guid>
       <pubDate>Sat, 13 Jan 2018 18:18:16 GMT</pubDate>
       <description>
       
@@ -65,7 +65,7 @@
       
       <content:encoded><![CDATA[<h1 id="用hexo-github-搭建博客"><a href="#用hexo-github-搭建博客" class="headerlink" title="用hexo + github 搭建博客"></a>用hexo + github 搭建博客</h1><p>早在几年以前用hexo 搭建过一个博客系统部署到github上，但是一直没有用起来，平时都是习惯用mac 的备忘录记录一些东西。现在离职状态中准备找下个东家了，发现没个博客还是有些不妥，所以开始重新又弄了弄hexo，顺便也记录一下过程。</p>]]></content:encoded>
       
-      <comments>http://qiansr.github.io/2018/01/14/Hexo%20+%20github%20%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/#disqus_thread</comments>
+      <comments>http://qiansr.github.io/2018/01/14/Hexo+github%20%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%8C%87%E5%8D%97/#disqus_thread</comments>
     </item>
     
     <item>
