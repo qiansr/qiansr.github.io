@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深入理解js系列,作用域,">
+
+
+
+
+
+  <link rel="alternate" href="/rss2.xml" title="神刀" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="作用域是什么？变量的作用域到底是如何在js中工作的？js是解释型语言而无法编译吗？什么是词法作用域？RHS查询与LHS查询？理解作用域js中的作用域可以理解为一套定义的规则，用来管理js引擎根据标识符名称进行变量查找，并确定当前执行代码对这些变量的访问权限。   编译原理要想深入理解js的作用域，我们必须得先知道js事实上是一门编译型语言（动态编译）– js引擎实际上是动态编译程序然后立即执行。与">
+<meta name="keywords" content="深入理解js系列,作用域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解js系列一作用域是什么？">
+<meta property="og:url" content="http://qiansr.github.io/2018/02/06/深入理解js系列一作用域是什么/index.html">
+<meta property="og:site_name" content="神刀">
+<meta property="og:description" content="作用域是什么？变量的作用域到底是如何在js中工作的？js是解释型语言而无法编译吗？什么是词法作用域？RHS查询与LHS查询？理解作用域js中的作用域可以理解为一套定义的规则，用来管理js引擎根据标识符名称进行变量查找，并确定当前执行代码对这些变量的访问权限。   编译原理要想深入理解js的作用域，我们必须得先知道js事实上是一门编译型语言（动态编译）– js引擎实际上是动态编译程序然后立即执行。与">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-18T21:35:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解js系列一作用域是什么？">
+<meta name="twitter:description" content="作用域是什么？变量的作用域到底是如何在js中工作的？js是解释型语言而无法编译吗？什么是词法作用域？RHS查询与LHS查询？理解作用域js中的作用域可以理解为一套定义的规则，用来管理js引擎根据标识符名称进行变量查找，并确定当前执行代码对这些变量的访问权限。   编译原理要想深入理解js的作用域，我们必须得先知道js事实上是一门编译型语言（动态编译）– js引擎实际上是动态编译程序然后立即执行。与">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'RINL8Q0DQF',
+      apiKey: '55343f67f7a297303ab19bd5408f8330',
+      indexName: 'hexo-blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"请输入关键字搜索","hits_empty":"没有找到关于 ${query} 的文章","hits_stats":"找到 ${hits} 篇文章，用时 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qiansr.github.io/2018/02/06/深入理解js系列一作用域是什么/">
+
+
+
+
+
+  <title>深入理解js系列一作用域是什么？ | 神刀</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">神刀</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://qiansr.github.io/2018/02/06/深入理解js系列一作用域是什么/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="神刀">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/logo.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="神刀">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深入理解js系列一作用域是什么？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-06T02:15:59+08:00">
+                2018-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/06/深入理解js系列一作用域是什么/" class="leancloud_visitors" data-flag-title="深入理解js系列一作用域是什么？">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="作用域是什么？"><a href="#作用域是什么？" class="headerlink" title="作用域是什么？"></a>作用域是什么？</h1><h1 id="变量的作用域到底是如何在js中工作的？"><a href="#变量的作用域到底是如何在js中工作的？" class="headerlink" title="变量的作用域到底是如何在js中工作的？"></a>变量的作用域到底是如何在js中工作的？</h1><h1 id="js是解释型语言而无法编译吗？"><a href="#js是解释型语言而无法编译吗？" class="headerlink" title="js是解释型语言而无法编译吗？"></a>js是解释型语言而无法编译吗？</h1><h1 id="什么是词法作用域？"><a href="#什么是词法作用域？" class="headerlink" title="什么是词法作用域？"></a>什么是词法作用域？</h1><h1 id="RHS查询与LHS查询？"><a href="#RHS查询与LHS查询？" class="headerlink" title="RHS查询与LHS查询？"></a>RHS查询与LHS查询？</h1><h1 id="理解作用域"><a href="#理解作用域" class="headerlink" title="理解作用域"></a>理解作用域</h1><p>js中的作用域可以理解为一套定义的规则，用来管理js引擎根据标识符名称进行变量查找，并确定当前执行代码对这些变量的访问权限。  </p>
+<h1 id="编译原理"><a href="#编译原理" class="headerlink" title="编译原理"></a>编译原理</h1><p>要想深入理解js的作用域，我们必须得先知道js事实上是一门编译型语言（动态编译）– js引擎实际上是动态编译程序然后立即执行。与传统编译语言在构建前编译不同的是：js的编译发生在代码执行前（有时是执行中）的很短时间内，而且编译完通常就会马上执行它。另外，对比传统编译，js引擎在语法分析和代码生成阶段有特定的步骤对运行性能进行优化。这也是后面会谈到的<code>eval()</code>和<code>with()</code> 影响运行效率的原因。</p>
+<h1 id="编译的三个步骤"><a href="#编译的三个步骤" class="headerlink" title="编译的三个步骤"></a>编译的三个步骤</h1><p>我们先来看看在传统编译语言中，一段源程序在执行前通常要经历的三个步骤，js作为一门动态编译语言，同样也会经历这些步骤：</p>
+<ol>
+<li>分词／词法分析（将源代码分解成词法单元）</li>
+<li>解析／语法解析（转换为一棵由元素逐级嵌套组成代表程序语法的抽象语法树AST）</li>
+<li>代码生成（将AST转换为可执行代码）</li>
+</ol>
+<p>在js中，js引擎负责整个js程序的编译和执行过程，编译器负责语法分析以及代码生成。</p>
+<h1 id="js引擎做了什么？"><a href="#js引擎做了什么？" class="headerlink" title="js引擎做了什么？"></a>js引擎做了什么？</h1><p>当遇到<code>var a = 2</code>这段程序，js引擎做了什么？</p>
+<ol>
+<li>首先编译器会将这段代码分解成词法单元</li>
+<li>编译器再将词法单元解析成一个树结构</li>
+<li>编译器开始进行代码生成  <ol>
+<li>遇到<code>var a</code>，查询作用域链是否有变量a：<br> 。 有a：跳过继续编译<br> 。 无a：在当前作用域声明一个变量a</li>
+<li>为引擎生成运行时所需代码    </li>
+</ol>
+</li>
+<li>引擎查询作用域链是否存在变量a：<br> 。存在：使用变量a执行赋值操作<br> 。不存在：抛出一个异常</li>
+</ol>
+<p>可以看出，变量的赋值操作会执行两个动作：<br>一个由编译器在编译时处理，另一个由引擎在运行时处理。  </p>
+<h1 id="RHS查询与LHS查询？-1"><a href="#RHS查询与LHS查询？-1" class="headerlink" title="RHS查询与LHS查询？"></a>RHS查询与LHS查询？</h1><p>LHS查询：查找变量的容器本身（a=1）<br>RHS查询： 查找变量的值（console.log(a)）</p>
+<pre><code>function foo(a){
+    console.log(a)
+}
+foo(2) //RHS查询
+// 将2作为参数传给foo函数，给参数a隐式地分配值时进行了一次LHS查询
+</code></pre><h1 id="作用域嵌套"><a href="#作用域嵌套" class="headerlink" title="作用域嵌套"></a>作用域嵌套</h1><h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p>在作用域中找不到变量  </p>
+<p>在作用域中找变量  </p>
+<p>总结：<br>不成功的RHS引用抛ReferenceError</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深入理解js系列/" rel="tag"># 深入理解js系列</a>
+          
+            <a href="/tags/作用域/" rel="tag"># 作用域</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/14/Hexo + github 博客搭建指南/" rel="next" title="Hexo + github 博客搭建指南">
+                <i class="fa fa-chevron-left"></i> Hexo + github 博客搭建指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/19/HelloWorld/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpeg" alt="神刀">
+            
+              <p class="site-author-name" itemprop="name">神刀</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/rss2.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/qiansr" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:caoyiqiansr@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域是什么？"><span class="nav-number">1.</span> <span class="nav-text">作用域是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变量的作用域到底是如何在js中工作的？"><span class="nav-number">2.</span> <span class="nav-text">变量的作用域到底是如何在js中工作的？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js是解释型语言而无法编译吗？"><span class="nav-number">3.</span> <span class="nav-text">js是解释型语言而无法编译吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是词法作用域？"><span class="nav-number">4.</span> <span class="nav-text">什么是词法作用域？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RHS查询与LHS查询？"><span class="nav-number">5.</span> <span class="nav-text">RHS查询与LHS查询？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#理解作用域"><span class="nav-number">6.</span> <span class="nav-text">理解作用域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译原理"><span class="nav-number">7.</span> <span class="nav-text">编译原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译的三个步骤"><span class="nav-number">8.</span> <span class="nav-text">编译的三个步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js引擎做了什么？"><span class="nav-number">9.</span> <span class="nav-text">js引擎做了什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RHS查询与LHS查询？-1"><span class="nav-number">10.</span> <span class="nav-text">RHS查询与LHS查询？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作用域嵌套"><span class="nav-number">11.</span> <span class="nav-text">作用域嵌套</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常"><span class="nav-number">12.</span> <span class="nav-text">异常</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">神刀</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FhBH7T2Nyx4gX32VC9WXCaHk-gzGzoHsz", "5GXJQEbqfaaU4iliNJU2ar6D");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="函数式,elm.js,">
+
+
+
+
+
+  <link rel="alternate" href="/rss2.xml" title="神刀" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Elm基础语法常用数据结构列表List    ： 只能容纳单一类型元素,是类型的容器而不是类型，List String才是类型元祖Tuples：可为不同类型，固定长度小于10Records    ：  具有键值对的数据结构 List （列表）list 方法 List.drop 1 [1,2,3,4]   —  [1,2,3] List.length [1,2,3,4]   — 4 List.hea">
+<meta name="keywords" content="函数式,elm.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elm学习指南">
+<meta property="og:url" content="http://qiansr.github.io/2017/09/10/Elm学习指南/index.html">
+<meta property="og:site_name" content="神刀">
+<meta property="og:description" content="Elm基础语法常用数据结构列表List    ： 只能容纳单一类型元素,是类型的容器而不是类型，List String才是类型元祖Tuples：可为不同类型，固定长度小于10Records    ：  具有键值对的数据结构 List （列表）list 方法 List.drop 1 [1,2,3,4]   —  [1,2,3] List.length [1,2,3,4]   — 4 List.hea">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-18T21:35:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Elm学习指南">
+<meta name="twitter:description" content="Elm基础语法常用数据结构列表List    ： 只能容纳单一类型元素,是类型的容器而不是类型，List String才是类型元祖Tuples：可为不同类型，固定长度小于10Records    ：  具有键值对的数据结构 List （列表）list 方法 List.drop 1 [1,2,3,4]   —  [1,2,3] List.length [1,2,3,4]   — 4 List.hea">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'RINL8Q0DQF',
+      apiKey: '55343f67f7a297303ab19bd5408f8330',
+      indexName: 'hexo-blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"请输入关键字搜索","hits_empty":"没有找到关于 ${query} 的文章","hits_stats":"找到 ${hits} 篇文章，用时 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qiansr.github.io/2017/09/10/Elm学习指南/">
+
+
+
+
+
+  <title>Elm学习指南 | 神刀</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">神刀</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://qiansr.github.io/2017/09/10/Elm学习指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="神刀">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/logo.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="神刀">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Elm学习指南</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-10T15:47:10+08:00">
+                2017-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/函数式编程/" itemprop="url" rel="index">
+                    <span itemprop="name">函数式编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/10/Elm学习指南/" class="leancloud_visitors" data-flag-title="Elm学习指南">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Elm基础语法"><a href="#Elm基础语法" class="headerlink" title="Elm基础语法"></a>Elm基础语法</h1><h2 id="常用数据结构"><a href="#常用数据结构" class="headerlink" title="常用数据结构"></a>常用数据结构</h2><p>列表List    ： 只能容纳单一类型元素,是类型的容器而不是类型，List String才是类型<br>元祖Tuples：可为不同类型，固定长度小于10<br>Records    ：  具有键值对的数据结构</p>
+<h3 id="List-（列表）"><a href="#List-（列表）" class="headerlink" title="List （列表）"></a>List （列表）</h3><pre><code>list 方法
+List.drop 1 [1,2,3,4]   —  [1,2,3]
+List.length [1,2,3,4]   — 4
+List.head [1,2,3,4]      — Just 1 : Maybe.Maybe number
+List.tail [1,2,3,4]     — Just [2,3,4] : Maybe.Maybe (List number)
+List.reverse [1,2,3,4]    — [4,3,2,1] : List number           反序
+List.sort [1,4,3,2]    — [1,2,3,4] : List number           排序 
+List.maximum a        — Just 4 : Maybe.Maybe number    最大值
+List.minimum a        — Just 1 : Maybe.Maybe number    最小值    
+0::[1,2,3,4]         — [0,1,2,3,4] : List number        “::”向列表添加元素0 
+[-1,-2]++[0,1,2,3,4]    — [-1,-2,0,1,2,3,4] : List number      “++”拼接列表
+</code></pre><h3 id="tuples-（元组）"><a href="#tuples-（元组）" class="headerlink" title="tuples （元组）"></a>tuples （元组）</h3><h3 id="records-（记录）"><a href="#records-（记录）" class="headerlink" title="records  （记录）"></a>records  （记录）</h3><pre><code>point = { x = 3, y = 4 }                -- create a record
+point.x                                 -- 访问字段
+List.map .x [point,{x=0,y=0}]           -- field access function
+{ point | x = 6 }                            -- update 字段
+{ point | x = point.x + 1, y = point.y + 1}  -- update 多个字段
+dist {x,y} = sqrt (x^2 + y^2)                -- pattern matching on fields
+
+type alias Location =    { line : Int , column : Int}    -- type aliases for records
+
+{x=3,y=7}.x  or .y {x=3,y=7} ／／.y为一个函数
+bill = {name = “cyq”, age = 20}
+bill2 = {bill | name = “222”}      copy一份bill — { name = “222”, age = 20 } : { age : number, name : String }
+</code></pre><ul>
+<li>你不可以使用不存在的field.</li>
+<li>field不可為 undefined 或是 null.</li>
+<li>你不可以使用 this 或 self 等關鍵字來創造遞迴的 records</li>
+</ul>
+<h2 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h2><p>有点类似es6的desttructuring</p>
+<h2 id="中缀运算符-（可自定义）"><a href="#中缀运算符-（可自定义）" class="headerlink" title="中缀运算符 （可自定义）"></a>中缀运算符 （可自定义）</h2><p>您可以创建自定义中缀运算符。 优先级从0到9，其中9是最紧密的。默认优先级为9，默认 关联性为左。您可以自行设置，但不能覆盖内置运算符。</p>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><pre><code>module MyModule exposing (..)
+-- qualified imports
+import List                    -- List.map, List.foldl
+import List as L               -- L.map, L.foldl
+
+-- open imports
+import List exposing (..)               -- map, foldl, concat, ...
+import List exposing ( map, foldl )     -- map, foldl
+</code></pre><p>优先进口合格。模块名称必须与其文件名匹配，因此模块Parser.Utils需要在文件中Parser/Utils.elm。</p>
+<h2 id="类型注释"><a href="#类型注释" class="headerlink" title="类型注释"></a>类型注释</h2><p>一些常见的类型：Int，Float，String，Bool</p>
+<h2 id="型別別名-type-alias"><a href="#型別別名-type-alias" class="headerlink" title="型別別名 (type alias)"></a>型別別名 (type alias)</h2><p>有時候，單純的基本型別可能無法完全詮釋我們想要表達的意思，也有可能是資料結構太複雜，我們想用一個簡單的名稱稱呼它，這時型別別名就可派上用場。</p>
+<pre><code>type alias Name = String
+type alias Age = Int
+type alias Person =
+    { name: String
+    , age: Int
+    }
+
+createPerson: Name -&gt; Age -&gt; Person
+createPerson name age =
+    { name = name
+    , age = age
+    }
+</code></pre><p><code>type alias Name = String</code> 的意思可以翻譯為 將 Name 設定為 String 的另一個別名。如此一來，我們就可以像這樣定義:<br><code>createPerson: Name -&gt; Age -&gt; Person</code><br>而不是<br><code>createPerson: String -&gt; Int -&gt; Person</code></p>
+<h3 id="自定义类型：（建立自創型別與-Union-Type）"><a href="#自定义类型：（建立自創型別與-Union-Type）" class="headerlink" title="自定义类型：（建立自創型別與 Union Type）"></a>自定义类型：（建立自創型別與 Union Type）</h3><p>自創型別的方法如下：<br><code>type Directions = Up | Down | Left | Right</code><br><code>type Maybe a = Nothing | Just a</code><br>我們可以創造兩種不同款式的型別，第一種像是上例的 Directions 比較直觀簡單，在這型別下只會有四種可能的值，就是我們定義的 Up，Down，Left，Right。在使用上的話我們可以這麼做：</p>
+<pre><code>convertDirectionsToInt: Directions -&gt; Int
+convertDirectionsToInt dir =
+    case dir of
+        Up -&gt; 1
+        Down -&gt; 2
+        Left -&gt; 3
+        Right -&gt; 4
+
+convertDirectionsToInt Up -- 1
+</code></pre><h2 id="Union-Types"><a href="#Union-Types" class="headerlink" title="Union Types"></a>Union Types</h2><p>用来表示一组可能的值，每个值叫做一个Tag<br>指的是我們可以將其它已存在的型別組合進我們自創的型別中。範例中我們建立了一個叫 Maybe 的型別，後面跟著的 a 是所謂的 型別變數，再更後面則是型別的值。我們可以自由在型別變數中帶入其他的型別如下：</p>
+<pre><code>-- 把 String 帶入 a
+maybeString: Maybe String
+maybeString = Just &quot;I am a string&quot;
+
+-- 把 Int 帶入 a
+maybeInt: Maybe Int
+maybeInt = Just 1
+
+anotherMaybeInt: Maybe Int
+maybeInt = Nothing
+</code></pre><p>以上三個變數都是屬於 Maybe a 型別，但隨著帶入的 a 不同，型別裡的值也會跟著改變。當然你也可以建立更複雜的 Union Type，例如:<br><code>type Directions a b = Up a | Down b | Left a b | Right</code></p>
+<h2 id="javascript-互操作"><a href="#javascript-互操作" class="headerlink" title="javascript 互操作"></a>javascript 互操作</h2><ol>
+<li>在HTML中嵌入Elm，</li>
+<li>在Elm和JavaScript之间来回发送消息</li>
+</ol>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><pre><code>multiply a b = a*b
+double = multiply 2
+List.map double [1,2,3,4]
+
+-- 通过匿名函数形式。
+List.map (\a -&gt; a * 2) [1..4] -- [2, 4, 6, 8]
+</code></pre><p><code>\counterMsg -&gt; Modify id counterMsg</code>是Elm中的匿名函数，在Elm中，匿名函数使用\开头紧接着参数，<br>并在-&gt;后书写返回值表达式，形如<code>\a -&gt; b</code>。</p>
+<p>– 通过<code>let...in...</code>语句来定义来定义一些将要立即使用的值。</p>
+<pre><code>volume {width, height, depth} = let area = width * height in area * depth
+volume { width = 3, height = 2, depth = 7 } -- 42
+</code></pre><p>函数名  参数 = </p>
+<h2 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h2><p>if true then “WHOA” else if true then “n” else “0”</p>
+<pre><code>case alist of
+[]-&gt;””
+[x]-&gt;””
+x::xs-&gt;””
+</code></pre><h1 id="elm-工程化"><a href="#elm-工程化" class="headerlink" title="elm 工程化"></a>elm 工程化</h1><pre><code>elm-webpack-project 脚手架
+git clone https://github.com/moarwick/elm-webpack-starter 
+rm -rf .git        
+git init   git add .   git commit -m &apos;first commit&apos;
+npm run reinstall  安装依赖
+</code></pre><p>自己搭建</p>
+<pre><code>－－－－package.json
+ &quot;scripts&quot;: {
+    &quot;elm-install&quot;: &quot;elm-package install&quot;,
+    &quot;build&quot;: &quot;elm-make Main.elm --output=build/index.js&quot;,
+    &quot;start&quot;: &quot;elm-live Main.elm --output=build/index.js --open&quot; 
+  },
+  &quot;devDependencies&quot;: {
+    &quot;elm&quot;: &quot;^0.18.0&quot;,
+    &quot;elm-live&quot;: &quot;^2.7.4&quot; //热更新，热加载模块
+  }
+
+
+－－－－－elm-package.json
+ &quot;dependencies&quot;: {
+        &quot;elm-lang/core&quot;: &quot;5.0.0 &lt;= v &lt; 6.0.0&quot;,
+        &quot;elm-lang/html&quot;: &quot;2.0.0 &lt;= v &lt; 3.0.0&quot;,
+        &quot;elm-lang/http&quot;: &quot;1.0.0 &lt;= v &lt; 2.0.0&quot;,
+        &quot;evancz/elm-markdown&quot;: &quot;3.0.1 &lt;= v &lt; 4.0.0&quot;
+  },
+  &quot;elm-version&quot;: &quot;0.18.0 &lt;= v &lt; 0.19.0&quot;
+
+
+
+－－－－－－－index.html
+&lt;div id=“main”&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+      var node = document.getElementById(‘main’);
+      var app = Elm.Main.embed(node);
+ &lt;/script&gt;
+
+
+－－－－－
+npm i
+npm run elm-install
+npm run start
+</code></pre><h1 id="官网示例库"><a href="#官网示例库" class="headerlink" title="官网示例库"></a>官网示例库</h1><p>git clone <a href="https://github.com/evancz/elm-architecture-tutorial.git" target="_blank" rel="noopener">https://github.com/evancz/elm-architecture-tutorial.git</a><br>cd elm-architecture-tutorial</p>
+<p><strong>学习资源</strong><br>Elm入门实践系列<br><a href="https://segmentfault.com/a/1190000005701562" target="_blank" rel="noopener">https://segmentfault.com/a/1190000005701562</a><br>初识Elm语言你只需要Y分钟<br><a href="https://github.com/Jocs/jocs.github.io/issues/2" target="_blank" rel="noopener">https://github.com/Jocs/jocs.github.io/issues/2</a><br>Elm架构教程<br><a href="https://segmentfault.com/a/1190000004872909" target="_blank" rel="noopener">https://segmentfault.com/a/1190000004872909</a>  </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/函数式/" rel="tag"># 函数式</a>
+          
+            <a href="/tags/elm-js/" rel="tag"># elm.js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/10/lisp学习指南/" rel="prev" title="Lisp学习指南">
+                Lisp学习指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpeg" alt="神刀">
+            
+              <p class="site-author-name" itemprop="name">神刀</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/rss2.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/qiansr" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:caoyiqiansr@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Elm基础语法"><span class="nav-number">1.</span> <span class="nav-text">Elm基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用数据结构"><span class="nav-number">1.1.</span> <span class="nav-text">常用数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List-（列表）"><span class="nav-number">1.1.1.</span> <span class="nav-text">List （列表）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tuples-（元组）"><span class="nav-number">1.1.2.</span> <span class="nav-text">tuples （元组）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#records-（记录）"><span class="nav-number">1.1.3.</span> <span class="nav-text">records  （记录）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模式匹配"><span class="nav-number">1.2.</span> <span class="nav-text">模式匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中缀运算符-（可自定义）"><span class="nav-number">1.3.</span> <span class="nav-text">中缀运算符 （可自定义）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块"><span class="nav-number">1.4.</span> <span class="nav-text">模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型注释"><span class="nav-number">1.5.</span> <span class="nav-text">类型注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#型別別名-type-alias"><span class="nav-number">1.6.</span> <span class="nav-text">型別別名 (type alias)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义类型：（建立自創型別與-Union-Type）"><span class="nav-number">1.6.1.</span> <span class="nav-text">自定义类型：（建立自創型別與 Union Type）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Union-Types"><span class="nav-number">1.7.</span> <span class="nav-text">Union Types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript-互操作"><span class="nav-number">1.8.</span> <span class="nav-text">javascript 互操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">1.9.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制语句"><span class="nav-number">1.10.</span> <span class="nav-text">控制语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#elm-工程化"><span class="nav-number">2.</span> <span class="nav-text">elm 工程化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#官网示例库"><span class="nav-number">3.</span> <span class="nav-text">官网示例库</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">神刀</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FhBH7T2Nyx4gX32VC9WXCaHk-gzGzoHsz", "5GXJQEbqfaaU4iliNJU2ar6D");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

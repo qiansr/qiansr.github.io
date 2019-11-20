@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="函数式,Lisp,">
+
+
+
+
+
+  <link rel="alternate" href="/rss2.xml" title="神刀" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="开发环境开发环境：SBCLEmacsSlime：在emacs里面帮助进行common lisp开发的扩展quicklisp：Common Lisp的包管理工具 安装步骤：安装emacs这个不用多讲了。从GNU的网站能下载到不同平台的版本。 安装SBCLbrew install sbcl       （不支持左右箭头移动光标. 安装rlwrap支持） brew install rlwrap   （命">
+<meta name="keywords" content="函数式,Lisp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lisp学习指南">
+<meta property="og:url" content="http://qiansr.github.io/2017/12/10/lisp学习指南/index.html">
+<meta property="og:site_name" content="神刀">
+<meta property="og:description" content="开发环境开发环境：SBCLEmacsSlime：在emacs里面帮助进行common lisp开发的扩展quicklisp：Common Lisp的包管理工具 安装步骤：安装emacs这个不用多讲了。从GNU的网站能下载到不同平台的版本。 安装SBCLbrew install sbcl       （不支持左右箭头移动光标. 安装rlwrap支持） brew install rlwrap   （命">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-18T21:35:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lisp学习指南">
+<meta name="twitter:description" content="开发环境开发环境：SBCLEmacsSlime：在emacs里面帮助进行common lisp开发的扩展quicklisp：Common Lisp的包管理工具 安装步骤：安装emacs这个不用多讲了。从GNU的网站能下载到不同平台的版本。 安装SBCLbrew install sbcl       （不支持左右箭头移动光标. 安装rlwrap支持） brew install rlwrap   （命">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'RINL8Q0DQF',
+      apiKey: '55343f67f7a297303ab19bd5408f8330',
+      indexName: 'hexo-blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"请输入关键字搜索","hits_empty":"没有找到关于 ${query} 的文章","hits_stats":"找到 ${hits} 篇文章，用时 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://qiansr.github.io/2017/12/10/lisp学习指南/">
+
+
+
+
+
+  <title>Lisp学习指南 | 神刀</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">神刀</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://qiansr.github.io/2017/12/10/lisp学习指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="神刀">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/logo.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="神刀">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Lisp学习指南</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T11:08:12+08:00">
+                2017-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Lisp/" itemprop="url" rel="index">
+                    <span itemprop="name">Lisp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/10/lisp学习指南/" class="leancloud_visitors" data-flag-title="Lisp学习指南">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h1><h2 id="开发环境："><a href="#开发环境：" class="headerlink" title="开发环境："></a>开发环境：</h2><p>SBCL<br>Emacs<br>Slime：在emacs里面帮助进行common lisp开发的扩展<br>quicklisp：Common Lisp的包管理工具</p>
+<h2 id="安装步骤："><a href="#安装步骤：" class="headerlink" title="安装步骤："></a>安装步骤：</h2><h3 id="安装emacs"><a href="#安装emacs" class="headerlink" title="安装emacs"></a>安装emacs</h3><p>这个不用多讲了。从GNU的网站能下载到不同平台的版本。</p>
+<h3 id="安装SBCL"><a href="#安装SBCL" class="headerlink" title="安装SBCL"></a>安装SBCL</h3><pre><code>brew install sbcl       （不支持左右箭头移动光标. 安装rlwrap支持）
+brew install rlwrap   （命令行输入交互增强工具, 支持方向键和历史命令）
+rlwrap sbcl        （启动sbcl命令）
+</code></pre><p>sbcl被安装到/usr/local/bin目录中(记住此地址，后面配置有用)</p>
+<h3 id="安装quicklisp"><a href="#安装quicklisp" class="headerlink" title="安装quicklisp"></a>安装quicklisp</h3><pre><code>$ curl -O http://beta.quicklisp.org/quicklisp.lisp
+$ sbcl --load quicklisp.lisp
+(quicklisp-quickstart:install)
+(ql:add-to-init-file)
+(ql:quickload &quot;quicklisp-slime-helper&quot;)
+</code></pre><p>安装教程：<a href="http://www.quicklisp.org/beta/#installation" target="_blank" rel="noopener">http://www.quicklisp.org/beta/#installation</a><br>查找可用的包的信息，可以到cliki上去搜。</p>
+<h3 id="安装slime"><a href="#安装slime" class="headerlink" title="安装slime"></a>安装slime</h3><p>在sbcl里面，运行：</p>
+<pre><code>(ql:quickload &quot;quicklisp-slime-helper&quot;)  
+</code></pre><p>根据提示修改Emacs的配置文件。  </p>
+<pre><code>cd ~/ &amp;&amp; vi .emacs
+添加下面两句
+(load (expand-file-name &quot;~/quicklisp/slime-helper.el&quot;))
+(setq inferior-lisp-program “/usr/local/bin/sbcl”)  ;你的sbcl路径  
+</code></pre><p>或者下载slime,地址 <a href="http://common-lisp.net/project/slime/#downloading" target="_blank" rel="noopener">http://common-lisp.net/project/slime/#downloading</a><br>把slime文件夹copy到了~/.emacs.d/目录中<br>配置.emacs配置文件：</p>
+<pre><code>(setq inferior-lisp-program &quot;/usr/local/bin/sbcl&quot;)  
+(add-to-list &apos;load-path &quot;~/.emacs.d/slime/&quot;)  
+(require &apos;slime)  
+(slime-setup)  
+</code></pre><p>做完上面的步骤以后，打开emacs，按M-x，输入slime<br>这篇文章也有助于了解Slime: <a href="http://www.open-open.com/lib/view/open1400054028504.html" target="_blank" rel="noopener">http://www.open-open.com/lib/view/open1400054028504.html</a></p>
+<h1 id="Lisp-基础语法"><a href="#Lisp-基础语法" class="headerlink" title="Lisp 基础语法"></a>Lisp 基础语法</h1><h2 id="表达式："><a href="#表达式：" class="headerlink" title="表达式："></a>表达式：</h2><p>表达式或是一个原子，或是一个由零个或多个表达式组成的表(list)。<br>表达式之间用空格分开，放入一对括号中。<br>在算术中，表达式 1 + 1 得出值2。<br>Lisp表达式也有值，如果表达式e得出 值v，我们说e返回v。<br>如果一个表达式是表，我们称第一个元素为操作符，其余的元素为自变量。<br>七个原始操作符：quote，atom，eq，car，cdr，cons，cond  </p>
+<p>通过引 用(quote)一个表,我们避免它被求值. 一个未被引用的表作为自变量传给象<br>atom这样的操作符将被视为代码:</p>
+<pre><code>(atom (atom &apos;a))
+=&gt; T
+</code></pre><p>反之一个被引用的表仅被视为表, 在此例中就是有两个元素的表:</p>
+<pre><code>(atom &apos;(atom &apos;a))
+=&gt; NIL
+</code></pre><h2 id="表与列表操作"><a href="#表与列表操作" class="headerlink" title="表与列表操作"></a>表与列表操作</h2><p>Lisp的全名叫“表处理语言”，LISt Procesor 。简单说来，用小括号括起来的表达式式就叫表。而表里面的东西，就是原子，表里不仅可以包含原子，也可以包含另一个表。也就是说表可以嵌套。最小的表就是空表 ( )。<br>在lisp中程序和数据都是用 表 来表示。<br>在lisp中 T 表示逻辑真；NIL表示逻辑假，同时也是空表。<br>Lisp会对所有的表求值，如果想使用表本身 (作为数据), 需在表前加 ‘ 操作符 (单引号)。</p>
+<pre><code>&apos;(+ 1 2)               
+=&gt; (+ 1 2)
+</code></pre><p>这次解译器不对这个表其求值了，而是原来这个表本身。<br>在所有的表中，第一个原子总是函数，代表操作、指令、命令。而之后原子（或表）是参数，意即对操作的说明</p>
+<h3 id="操作表"><a href="#操作表" class="headerlink" title="操作表"></a>操作表</h3><p>car:                 取出表的第一个元素并返回该元素（同first）<br>last:                返回最后一个元素的表<br>cdr:                返回除第一个元素之外的表（同rest）</p>
+<pre><code>(car &apos;((1 2) 3))       =&gt;（1 2）
+(cdr &apos;(+ 1 2 3))        =&gt;  (1 2 3)       #取出函数的参数
+(cdr &apos;(1))              =&gt;  NIL
+(cadr &apos;(1 2 3))         =&gt;  2           #等价(car (cdr (cdr &apos;(1 2 3))))
+</code></pre><p>其它:cadr    or    caddr</p>
+<h3 id="构造表"><a href="#构造表" class="headerlink" title="构造表"></a>构造表</h3><p><strong>cons 函数</strong>:<br>连接一个元素与一个表，接受两个参数，参数顺序不可颠倒。第二个参数为列表时，才能返回一个列表。cons 的作用是将两棵树连接成一棵树。</p>
+<pre><code>(cons 1 &apos;(2 3))                    =&gt; (1 2 3) 
+(cons 2 3)                        =&gt; (2 . 3)  
+(cons 1 (cons 2 &apos;(3)))            =&gt; (1 2 3)     连接三个或以上的元素
+(cons 1 (cons 2 (cons 3 nil)))    =&gt; (1 2 3)
+(cons 3 nil)                    =&gt; (3)
+</code></pre><p><strong>为什么(cons 2 3) 返回 (2 . 3)呢？中间有一个 “.”呢？</strong></p>
+<blockquote>
+<p>这是因为表实际上是一个树（二叉树），在S表达式中， 二叉树表示为 (Left . Right)。<br>如果左支是表，成为形式：((List) . Right)<br>如果右支是表，表示为 (Left . (List)) ，此时点可以省略，写成(Left List)<br><code>&#39;(3 . (2 3))  =&gt; (3 2 3)</code><br>这就是为什么cdr操作符会取出除第一个外的所有元素，因为它实质是取二叉树的右支。</p>
+</blockquote>
+<p><strong>append 函数</strong>:<br>它会把最外一层括号去掉，然后连接</p>
+<pre><code>(append &apos;(3 3) &apos;(4 4))          =&gt;  (3 3 4 4)  连接两个表
+(append &apos;((3)) &apos;(4 4))           =&gt;  ((3) 4 4)
+</code></pre><p><strong>list 函数</strong>:<br>list 函数将所有的参数放入一个表中并返回</p>
+<pre><code>(list 1 1 1 1)                  =&gt;  (1 1 1 1)  返回包含所有参数的表
+(list &apos;(2 3) &apos;(2) 1 2)            =&gt;  ((2 3) (2) 1 2)
+</code></pre><p>构造函数 cons带有两个参数：一个原子和一个列表。cons 将该原子作为第一个元素添加到该列表。如果对 nil 调用 cons，Lisp 将 nil 作为空列表对待，并构建一个含一个元素的列表。append 连接两个列表。list 包含一个由所有参数组成的列表</p>
+<h2 id="原子和值"><a href="#原子和值" class="headerlink" title="原子和值"></a>原子和值</h2><p><strong>原子</strong><br>可以是任何数或者字母排列。空表就是原子NIL。  </p>
+<pre><code>&apos;sdf  =&gt; SDF       原子前面加一个引用符（单引号），返回这个原子本身
+</code></pre><p><strong>atom 运算符</strong><br>判断一个元素是不是原子  </p>
+<pre><code>(atom &apos;a)        =&gt; T        a 是一个原子
+(atom &apos;(3))        =&gt; NIL    (3) 是一个列表而不是原子
+</code></pre><p><strong>setq 运算符</strong><br>绑定一个变量</p>
+<pre><code>(setq a 5)         =&gt; 5
+a  =&gt; 5
+</code></pre><p>setq的意义就是赋值并且将此值返回。就是说表达式(setq a 5)的值是5<br>我们可以接着</p>
+<pre><code>(setq a 6)        =&gt; 6
+(cons a &apos;(3))          =&gt; (6 3)
+(setq a &apos;b)        =&gt; B
+(cons a &apos;(3))        =&gt; (B 3)
+(setq a &apos;(1 2 3))    =&gt; (1 2 3)
+(cdr a)            =&gt; (2 3)
+</code></pre><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h3><pre><code>(defun 函数名 (参数列表)
+  (first (rest lst))；执行体
+)
+</code></pre><p>defun 用来定义函数。第一个参数是函数名，第二个参数是参数列表，第三个参数是希望执行的代码<br>Lisp 所有代码都表述为列表。可以像操纵其他任何数据一样操纵应用程序。</p>
+<h3 id="断言函数"><a href="#断言函数" class="headerlink" title="断言函数"></a>断言函数</h3><p><strong>atom 函数</strong><br>用来判断一个表达式是不是原子</p>
+<pre><code>(atom (+ 1 1))        =&gt; T
+(atom &apos;(3))        =&gt; NIL
+</code></pre><p>因为2是原子，而（3）是个表。</p>
+<p><strong>null 函数</strong><br>NULL函数用来判断表达式的值是不是NIL。</p>
+<pre><code>(null nil)            =&gt; T
+(null (car &apos;(3)))        =&gt; NIL
+</code></pre><p><strong>equal 函数</strong><br>用来判断两个表达式的值是否完全相等  </p>
+<pre><code>(equal &apos;s &apos;s)        =&gt; T
+(equal &apos;(s) &apos;(s))        =&gt; T
+</code></pre><h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><p>在 Lisp 中，由于函数和列表没有任何区别，高阶函数也就非常简单。<br>高阶函数的最常见用法或许是 lambda 表达式，这是闭包的 Lisp 版。lambda 函数是用于将高阶函数传入 Lisp 函数的函数定义。<br>例如，下列lambda 表达式计算了两个整数的和：<br>(setf total ‘(lambda (a b) (+ a b)))<br>(LAMBDA (A B) (+ A B))<br> total<br>(LAMBDA (A B) (+ A B))<br>(apply total ‘(101 102))<br>203</p>
+<p>如果使用过高阶函数或闭包，那么可能更容易理解清单 10 中的代码。第一行代码定义了一个 lambda   </p>
+<p>表达式并将其和 total 符号绑定到一起。第二行代码仅显示了这个和 total 绑定到一起的 lambda 表达式。最终，最后一个表达式对包含 (101 102) 的列表应用这个 lambda 表达式。<br>高阶函数提供比面向对象概念更高层次的抽象。可以用它们来更简洁清晰地表达想法。编程的至高境界就是在不牺牲可读性或性能的前提下，用更少的代码提供更强大更灵活的功能。高阶函数能实现所有这些要求。  </p>
+<p>Lisp 还有两种类型的高阶函数。其中功能最强大的可能是宏。宏为后面的执行定义 Lisp 对象。可以将宏看作代码模板。请参考清单 11 中的示例：<br>清单 11. 宏</p>
+<pre><code>(defmacro times_two (x) (* 2 x))
+TIMES_TWO
+
+(setf a 4)
+4
+
+(times_two a)
+8
+</code></pre><p>这个示例应该分为两个阶段进行阅读。第一次赋值定义了宏 times_two。在第二个阶段（称为宏扩展）中，在对 a 求值之前，将 a 扩展为 (* 2 a)。该模板中这项延迟求值方式使宏的功能非常强大。Lisp 语言本身的许多功能都是基于宏的。</p>
+<h2 id="条件结构"><a href="#条件结构" class="headerlink" title="条件结构"></a>条件结构</h2><p><strong>Cond 函数：</strong></p>
+<pre><code>(cond 分支列表1 分支列表2 分支列表3 ... )
+</code></pre><p>分支列表的构成： (条件p 值e)<br>Cond 将对每一个“条件p”求值，如果为NIL，就接着求下一个，如果为真，就返回相应的“值e”，如果没有一个真值，cond操作符返回nil。  </p>
+<p><strong>if 函数：</strong></p>
+<pre><code>(if 判断表达式 真值时的返回值 假值时的返回值)
+</code></pre><p>eg：计算两个整数中的最大值</p>
+<pre><code>(defun my_max (x y)
+  (if (&gt; x y) x y)
+)
+</code></pre><h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p><strong>递归计算列表的总和:</strong>  </p>
+<pre><code>(defun total (x)
+  (if (null x)
+    0
+    (+ (first x) (total (rest x)))
+  )
+)
+(total &apos;(1 5 1))   =&gt;  7
+</code></pre><p>total 函数将列表当作单个的参数。第一个 if 语句在列表为空的情况下中断递归，返回零值。否则，该函数将第一个元素添加到列表其余部分的总和。现在应该明白如此构建 first 和 rest 的原因。first 能够去除列表的第一个元素，rest 简化了将尾部递归应用于列表其余部分的过程。</p>
+<p><strong>递归计算列表的长度:</strong></p>
+<pre><code>(defun len (x) (cond ((null x) 0) (t (+ (len (cdr x)) 1))))
+(len &apos;(a b c d)) =&gt; 4
+</code></pre><p>len用来计算一个表x的长（即元素个数）度<br>递归式是(len (cdr x)) ，终结条件是(null x)为真</p>
+<p><strong>trace函数</strong><br>用来跟踪函数调用的情况</p>
+<pre><code>(trace len)
+(len &apos;(a b c d)) 
+=&gt;
+0: (LEN (A B C D))
+    1: (LEN (B C D))
+      2: (LEN (C D))
+        3: (LEN (D))
+          4: (LEN NIL)
+          4: LEN returned 0
+        3: LEN returned 1
+      2: LEN returned 2
+    1: LEN returned 3
+0: LEN returned 4
+</code></pre><h2 id="基本操作符"><a href="#基本操作符" class="headerlink" title="基本操作符"></a>基本操作符</h2><p>7个基本操作符对应7大公理，任何其他函数都可以由其定义。也就是说，7个基本操作符包含了Lisp的所有语义。<br><strong>这7个基本操作符是：</strong></p>
+<ol>
+<li>Quote</li>
+<li>Atom</li>
+<li>Eq</li>
+<li>Car</li>
+<li>Cdr</li>
+<li>Cons</li>
+<li>Cond</li>
+</ol>
+<p>下面的函数系统Lisp都有提供，我们也可以用7个操作符函数重新实现一遍。</p>
+<p><strong>NULL函数</strong><br>NULL函数用于检测表是否为空，或者元素是否为nil。  </p>
+<pre><code>(defun null2 (x) (cond ((equal x nil) t) (t nil))))
+</code></pre><p>解释：如果参数与nil相等，就返回t，否则返回nil。这和逻辑学上的not函数是一致的（但null函数的应用范围更广，因为它可以应用于表）。</p>
+<p><strong>And函数</strong></p>
+<pre><code>(defun and2 (x y) (cond ((equal x nil) nil) ((not (equal y nil)) t) (t nil)))
+</code></pre><p><strong>Or函数</strong></p>
+<pre><code>(defun or2 (x y) (cond ((equal x t) t) ((equal y t) t)))
+</code></pre><p><strong>Last 函数</strong></p>
+<pre><code>(defun last2 (x) (cond ((equal (cdr x) nil) x) (t (last2 (cdr x)))))
+</code></pre><p><strong>Length函数</strong><br>下面讲如何计算一个表x的长（即元素个数）度。</p>
+<pre><code>(defun len (x) (cond ((null x) 0) (t (+ (len (cdr x)) 1))))
+</code></pre><p>递归式是(len (cdr x)) ，终结条件是(null x)为真。</p>
+<p><strong>Append函数</strong><br>设参数形式是x和y。很容易分析出来，递归式是(cons (car x) (append2 (cdr x) y))，终结条件是当x为NIL时，返回y。</p>
+<pre><code>(defun append2 (x y) (cond ((eq x nil) y) (t (cons (car x) (append2 (cdr x) y)))))
+</code></pre><p><strong>Equal函数</strong><br>设参数形式是x和y。很容易分析出来，递归式是(equal (cdr x) (cdr y))，递归条件是(equal (car x) (car y))，终止条件是(equal (cdr x) nil)或者(equal (cdr y) nil)或者((atom x) (equal x y))</p>
+<pre><code>(defun equal2 (x y) 
+  (cond 
+    ((null x) (not y))
+    ((null y) (not x))
+    ((atom x) (eq x y))
+    ((atom y) (eq x y))
+    ((not (equal2  (car x) (car y))) nil)
+    (t (equal2 (cdr x) (cdr y)))
+  )
+)
+</code></pre><p>代码解释：  </p>
+<p><code>((null x) (not y))</code><br>首先，如果x为空，说明遇到了x列表的末尾，这时检测y列表是否也到了，如果到了（此时我们知道之前的元素都相等），那么返回真，否则返回假。  </p>
+<p><code>((null y) (not x))</code>  </p>
+<p>如果y到了末尾，一样处理。<br><code>((atom x) (eq x y))</code><br>如果x是一个原子，说明函数是从<code>(equal2 (car x) (car y))</code>字句进入的，且<code>(car x)</code>的结果为原子。这时函数就可以结束了，返回x=y的结果。<br><code>((atom y) (eq x y))</code><br>如果y是一个原子，说明函数是从<code>(equal2 (car x) (car y))</code>字句进入的，且<code>(car y)</code>的结果为原子。这时函数就可以结束了，返回x=y的结果。<br><code>(t (equal2 (cdr x) (cdr y)))</code><br>否则的情况，我们就递归。<br>总结，大家可以发现，其实这个函数的递归路径有两个。  </p>
+<p><strong>If函数</strong><br>用cond可以实现if函数。实际上，在类c语言中，if语句强调的是程序的走向，但在Lisp中，程序的走向可以忽略（从某种意义上），而强调的是返回值。  </p>
+<pre><code>(defun if2 (p e1 e2)
+(cond (p e1) (t e2))
+)
+</code></pre><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><pre><code>#&apos;        组合符号  等价函数 function
+</code></pre><h1 id="Lisp开发Web程序"><a href="#Lisp开发Web程序" class="headerlink" title="Lisp开发Web程序"></a>Lisp开发Web程序</h1><p>用lisp可以开发出一套“子语言”，用于生成html。现成的成熟框架，可以参考cl-who。</p>
+<p>可以把lisp代码编译成javascript。你用lisp编写的程序，到了html里，就成了javascript。可以看一下parenscript(<a href="http://www.cliki.net/parenscript" target="_blank" rel="noopener">http://www.cliki.net/parenscript</a>)  </p>
+<p>cliki上搜一下web framework，你可以得到一大堆。你可以试一下cl-weblocks。阅读一下它的文档，你可以看到很多厉害的特性，忍不住会上手试一下！<a href="http://weblocks-framework.info" target="_blank" rel="noopener">http://weblocks-framework.info</a> 上面有不错的文档。有的文档资料可能旧了点，但能够说清楚。  </p>
+<h2 id="使用Weblocks编写Web应用"><a href="#使用Weblocks编写Web应用" class="headerlink" title="使用Weblocks编写Web应用"></a>使用Weblocks编写Web应用</h2><p>安装weblocks</p>
+<pre><code>(ql:quickload :weblocks)
+</code></pre><p>安装demo程序</p>
+<pre><code>(ql:quickload :weblocks-demo)
+</code></pre><p>运行</p>
+<pre><code>(weblocks:start-weblocks)    ;可以在8080端口启动一个http服务。
+</code></pre><p>运行示例</p>
+<pre><code>(weblocks-demo:start-weblocks-demo :port 3455)
+</code></pre><p>访问：<a href="http://localhost:3455/weblocks-demo" target="_blank" rel="noopener">http://localhost:3455/weblocks-demo</a><br>(如果发现这样的报警，可以忽略，不影响：An instance of WEBLOCKS-DEMO with name weblocks-demo is already running, ignoring start request)  </p>
+<p>创建自己的应用</p>
+<pre><code>(wop:make-app &apos;NAME &quot;DIR&quot;)    ;建立名称为Name的应用，放在DIR目录下
+</code></pre><p>例如：(wop:make-app ‘firstapp “home/richard/lisp”)<br>这样就会在“home/richard/lisp”目录建立一个firstapp子目录，里面有几个必要的目录和模板程序。  </p>
+<p>加载和修改自己的应用<br>要能在开发环境加载和修改自己的应用，需要能够找到firstapp。这需要了解一下asdf的配置。asdf是lisp的模块依赖的管理工具。具体可以参考：  </p>
+<p><a href="http://www.common-lisp.net/project/asdf/" target="_blank" rel="noopener">http://www.common-lisp.net/project/asdf/</a><br><a href="http://basiccoder.com/constructing-common-lisp-package-by-asdf.html" target="_blank" rel="noopener">http://basiccoder.com/constructing-common-lisp-package-by-asdf.html</a><br><a href="http://blog.csdn.net/xiaojianpitt/article/details/7727152" target="_blank" rel="noopener">http://blog.csdn.net/xiaojianpitt/article/details/7727152</a>  </p>
+<p>我的配置：<br>建立目录：/home/richard/.config/common-lisp/source-registry.conf.d<br>在里面建两个配置文件：<br>01practicals.conf<br>内容： (:tree “/home/richard/practicals-1.0.3/“)<br>这样就可以随时加载执行《实用commonlisp编程》里面的例子了。<br>比如：(ql:quickload :chapter31)就可以加载第31章的例子。<br>02richard.conf 指向我自己的工作目录。<br>内容：(:tree “/home/richard/lisp/“)。<br>这样就可以找到firstapp。用(ql:quickload :firstapp)来加载和修改。  </p>
+<p>加载后，运行</p>
+<pre><code>(in-package :firstapp)  切换到:firstapp包；
+(start-firstapp :port 3456)  启动应用，在3456端口监听
+</code></pre><p>学习资料推荐<br>Lisp的本质<br><a href="http://www.cnblogs.com/Leap-abead/articles/762180.html" target="_blank" rel="noopener">http://www.cnblogs.com/Leap-abead/articles/762180.html</a><br>Lisp之根源（The roots of Lisp）<br>中文版：<a href="http://daiyuwen.freeshell.org/gb/rol/roots_of_lisp.html" target="_blank" rel="noopener">http://daiyuwen.freeshell.org/gb/rol/roots_of_lisp.html</a><br>Lisp之美<br><a href="https://www.ibm.com/developerworks/cn/java/j-cb02067.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-cb02067.html</a><br>Common Lisp 初学者快速入门指导<br><a href="https://my.oschina.net/freeblues/blog/131557#1.2" target="_blank" rel="noopener">https://my.oschina.net/freeblues/blog/131557#1.2</a><br>在Mac下搭建Common Lisp开发环境(Emacs)<br><a href="http://it.taocms.org/06/954.htm" target="_blank" rel="noopener">http://it.taocms.org/06/954.htm</a>  </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/函数式/" rel="tag"># 函数式</a>
+          
+            <a href="/tags/Lisp/" rel="tag"># Lisp</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/10/Elm学习指南/" rel="next" title="Elm学习指南">
+                <i class="fa fa-chevron-left"></i> Elm学习指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/11/Java学习笔记/" rel="prev" title="Java学习笔记">
+                Java学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/logo.jpeg" alt="神刀">
+            
+              <p class="site-author-name" itemprop="name">神刀</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/rss2.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/qiansr" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:caoyiqiansr@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开发环境"><span class="nav-number">1.</span> <span class="nav-text">开发环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开发环境："><span class="nav-number">1.1.</span> <span class="nav-text">开发环境：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装步骤："><span class="nav-number">1.2.</span> <span class="nav-text">安装步骤：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装emacs"><span class="nav-number">1.2.1.</span> <span class="nav-text">安装emacs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装SBCL"><span class="nav-number">1.2.2.</span> <span class="nav-text">安装SBCL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装quicklisp"><span class="nav-number">1.2.3.</span> <span class="nav-text">安装quicklisp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装slime"><span class="nav-number">1.2.4.</span> <span class="nav-text">安装slime</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lisp-基础语法"><span class="nav-number">2.</span> <span class="nav-text">Lisp 基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#表达式："><span class="nav-number">2.1.</span> <span class="nav-text">表达式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表与列表操作"><span class="nav-number">2.2.</span> <span class="nav-text">表与列表操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作表"><span class="nav-number">2.2.1.</span> <span class="nav-text">操作表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造表"><span class="nav-number">2.2.2.</span> <span class="nav-text">构造表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原子和值"><span class="nav-number">2.3.</span> <span class="nav-text">原子和值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">2.4.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数定义"><span class="nav-number">2.4.1.</span> <span class="nav-text">函数定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#断言函数"><span class="nav-number">2.4.2.</span> <span class="nav-text">断言函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高阶函数"><span class="nav-number">2.4.3.</span> <span class="nav-text">高阶函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件结构"><span class="nav-number">2.5.</span> <span class="nav-text">条件结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归"><span class="nav-number">2.6.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作符"><span class="nav-number">2.7.</span> <span class="nav-text">基本操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">2.8.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lisp开发Web程序"><span class="nav-number">3.</span> <span class="nav-text">Lisp开发Web程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Weblocks编写Web应用"><span class="nav-number">3.1.</span> <span class="nav-text">使用Weblocks编写Web应用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">神刀</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("FhBH7T2Nyx4gX32VC9WXCaHk-gzGzoHsz", "5GXJQEbqfaaU4iliNJU2ar6D");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
