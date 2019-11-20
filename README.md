@@ -1,7 +1,7 @@
 # qiansr.github.io
 [个人博客](http://qiansr.github.io/)
 
-hexo d -g   编译发布
+hexo d -g   编译发布  
 hexo server  本地预览
 
 
